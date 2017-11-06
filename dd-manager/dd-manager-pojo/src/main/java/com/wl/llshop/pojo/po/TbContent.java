@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 package com.wl.llshop.pojo.po;
 
 import java.util.Date;
