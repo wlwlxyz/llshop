@@ -18,6 +18,8 @@
         <module>dd-manager-web</module>
     </modules>
     <artifactId>dd-manager</artifactId>
+
+
     <dependencies>
         <dependency>
             <groupId>com.wl.llshop</groupId>
@@ -81,5 +83,6 @@
 
 
     </dependencies>
+
 
 </project>

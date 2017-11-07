@@ -1,6 +1,12 @@
 package com.wl.llshop.service;
 
+import com.wl.llshop.common.dto.Page;
 import com.wl.llshop.pojo.po.TbItem;
+import com.wl.llshop.common.dto.result;
+import com.wl.llshop.pojo.vo.TbItemCustum;
+
+
+import java.util.List;
 
 /**
  * User: Administrator
@@ -11,4 +17,8 @@ import com.wl.llshop.pojo.po.TbItem;
 public interface ItemService {
 
     TbItem getById(Long itemId);
+
+    List<TbItem> listItems();
+
+    result<TbItemCustum> listItemByPage(Page page);
 }

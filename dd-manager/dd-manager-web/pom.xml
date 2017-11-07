@@ -10,13 +10,14 @@
     <packaging>war</packaging>
     <name>dd-manager-web Maven Webapp</name>
     <url>http://maven.apache.org</url>
+
     <dependencies>
         <dependency>
             <groupId>com.wl.llshop</groupId>
             <artifactId>dd-manager-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--!!!!!!!!!!!!-->
+
         <!-- 文件上传组件 -->
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -40,34 +41,6 @@
             <artifactId>jstl</artifactId>
         </dependency>
 
-       <!-- &lt;!&ndash;字符串工具&ndash;&gt;
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        &lt;!&ndash; io工具 &ndash;&gt;
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-        &lt;!&ndash; 通信工具，如ftp &ndash;&gt;
-        <dependency>
-            <groupId>commons-net</groupId>
-            <artifactId>commons-net</artifactId>
-        </dependency>-->
-        <!-- Json处理工具包，Jackson -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <!-- ueditor使用 -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-        </dependency>
-
-
-
     </dependencies>
     <build>
         <finalName>dd-manager-web</finalName>
@@ -83,3 +56,4 @@
         </plugins>
     </build>
 </project>
+
