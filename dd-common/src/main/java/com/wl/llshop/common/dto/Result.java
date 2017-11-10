@@ -8,7 +8,7 @@ import java.util.List;
  * Time: 16:13
  * Version:V1.0
  */
-public class result<T> {
+public class Result<T> {
     //总行数
     private  Long total;
     //商品详情

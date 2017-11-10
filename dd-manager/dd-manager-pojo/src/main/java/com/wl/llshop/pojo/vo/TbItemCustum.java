@@ -11,6 +11,33 @@ import com.wl.llshop.pojo.po.TbItem;
 public class TbItemCustum extends TbItem{
     private String catName;
     private String stuting;
+    private String updatedtime;
+    private String priceView;
+    private String statusName;
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    public String getPriceView() {
+        return priceView;
+    }
+
+    public void setPriceView(String priceView) {
+        this.priceView = priceView;
+    }
+
+    public String getUpdatedtime() {
+        return updatedtime;
+    }
+
+    public void setUpdatedtime(String updatedtime) {
+        this.updatedtime = updatedtime;
+    }
 
     public String getStuting() {
         return stuting;

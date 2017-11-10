@@ -1,8 +1,9 @@
 package com.wl.llshop.service;
 
+import com.wl.llshop.common.dto.Order;
 import com.wl.llshop.common.dto.Page;
 import com.wl.llshop.pojo.po.TbItem;
-import com.wl.llshop.common.dto.result;
+import com.wl.llshop.common.dto.Result;
 import com.wl.llshop.pojo.vo.TbItemCustum;
 
 
@@ -20,5 +21,11 @@ public interface ItemService {
 
     List<TbItem> listItems();
 
-    result<TbItemCustum> listItemByPage(Page page);
+    Result<TbItemCustum> listItemByPage(Page page, Order order);
+
+    int updateItemsByIds(List<Long> ids);
+
+    int updateuprows(List<Long> ids);
+
+    int updatedownrows(List<Long> ids);
 }

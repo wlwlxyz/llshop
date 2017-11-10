@@ -1,10 +1,12 @@
 package com.wl.llshop.service.impl;
 
+import com.wl.llshop.common.dto.Order;
 import com.wl.llshop.common.dto.Page;
-import com.wl.llshop.common.dto.result;
+import com.wl.llshop.common.dto.Result;
 import com.wl.llshop.dao.TbItemCustomMapper;
 import com.wl.llshop.dao.TbItemMapper;
 import com.wl.llshop.pojo.po.TbItem;
+import com.wl.llshop.pojo.po.TbItemExample;
 import com.wl.llshop.pojo.vo.TbItemCustum;
 import com.wl.llshop.service.ItemService;
 
@@ -43,13 +45,42 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public result<TbItemCustum> listItemByPage(Page page) {
+    public Result<TbItemCustum> listItemByPage(Page page,Order order) {
         int i= itemCustomDao.countItems();
-        result<TbItemCustum> result = new result<>();
+        Result<TbItemCustum> result = new Result<>();
         long total = (long)i;
         result.setTotal(total);
-        List<TbItemCustum> tbItems = itemCustomDao.listItemByPage(page);
-        result.setRows(tbItems);
+            List<TbItemCustum> tbItems = itemCustomDao.listItemByPage(page,order);
+            result.setRows(tbItems);
         return result;
+    }
+    @Override
+    public int updateItemsByIds(List<Long> ids) {
+        TbItem tbItem = new TbItem();
+        tbItem.setStatus((byte)3);
+        TbItemExample example = new TbItemExample();
+        TbItemExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(ids);
+        return itemdao.updateByExampleSelective(tbItem,example);
+    }
+
+    @Override
+    public int updateuprows(List<Long> ids) {
+        TbItem tbItem = new TbItem();
+        tbItem.setStatus((byte)1);
+        TbItemExample example = new TbItemExample();
+        TbItemExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(ids);
+        return itemdao.updateByExampleSelective(tbItem,example);
+    }
+
+    @Override
+    public int updatedownrows(List<Long> ids) {
+        TbItem tbItem = new TbItem();
+        tbItem.setStatus((byte)2);
+        TbItemExample example = new TbItemExample();
+        TbItemExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(ids);
+        return itemdao.updateByExampleSelective(tbItem,example);
     }
 }

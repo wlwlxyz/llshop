@@ -1,23 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wl.llshop.dao.TbItemCustomMapper" >
-    
+
     <sql id="Base_Column_List" >
         i.id, i.title, i.sell_point as sellPoint, i.price, i.num, i.barcode, i.image, i.cid, i.status, i.created, i.updated,
-        c.name as catName
+        c.name as catName,DATE_FORMAT(i.updated,'%Y-%m-%d') as updatedtime,FORMAT(i.price/100,2) as priceView,
+                CASE i.status
+                        when 1 then'正常'
+                        when 2 then'下架'
+                        when 3 then'删除'
+                        ELSE "未知" END as statusName
+
     </sql>
     <select id="countItems" resultType="int">
        select count(1)
     from tb_item
+     WHERE status != 3
     </select>
 
-    <select id="listItemByPage" parameterType="com.wl.llshop.common.dto.Page" resultType="com.wl.llshop.pojo.vo.TbItemCustum">
-    select 
+  <!--  <select id="listItemByPage" parameterType="com.wl.llshop.common.dto.Page" resultType="com.wl.llshop.pojo.vo.TbItemCustum">
+    select
     <include refid="Base_Column_List"/>
         from tb_item i
-        LEFT JOIN tb_item_cat c ON
-        i.cid=c.id
-        limit #{offset},#{rows}
+        LEFT JOIN tb_item_cat c ON i.cid=c.id
+        WHERE i.status != 3
+        <choose>
+            <when test="order != null and order.sort eq'sellPoint'   and order.order != null">
+                ORDER BY   CONVERT(${order.sort} USING gbk) ${order.order}
+            </when>
+            <when test="order != null and order.sort eq'title'   and order.order != null">
+                ORDER BY   CONVERT(i.${order.sort} USING gbk) ${order.order}
+            </when>
+            <otherwise>
+                ORDER BY i.id DESC
+            </otherwise>
+        </choose>
+        limit #{page.offset},#{page.rows}
+    </select>-->
+
+
+    <select id="listItemByPage" parameterType="com.wl.llshop.common.dto.Page" resultType="com.wl.llshop.pojo.vo.TbItemCustum">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_item i
+        LEFT JOIN tb_item_cat c ON i.cid=c.id
+        WHERE i.status != 3
+        <choose>
+            <when test="order != null and order.sort !=null   and order.order != null">
+               <foreach collection="order.orderParam" item="item" open="order by" close="" separator=",">
+                          <choose>
+                              <when test="item eq 'sellPoint  desc' ">
+                                  i.sell_point   desc
+                              </when>
+                              <when test="item eq 'sellPoint  asc' ">
+                                  i.sell_point   asc
+                              </when>
+                              <when test="item eq 'title  asc'">
+                                  i.title  asc
+                              </when>
+                              <otherwise>
+                                  i.title  desc
+                              </otherwise>
+                          </choose>
+               </foreach>
+            </when>
+            <otherwise>
+                ORDER BY i.id DESC
+            </otherwise>
+        </choose>
+        limit #{page.offset},#{page.rows}
     </select>
+
 
 </mapper>
