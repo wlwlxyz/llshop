@@ -8,8 +8,8 @@ import com.wl.llshop.dao.TbItemMapper;
 import com.wl.llshop.pojo.po.TbItem;
 import com.wl.llshop.pojo.po.TbItemExample;
 import com.wl.llshop.pojo.vo.TbItemCustum;
+import com.wl.llshop.pojo.vo.TbItemQuery;
 import com.wl.llshop.service.ItemService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,12 +45,12 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public Result<TbItemCustum> listItemByPage(Page page,Order order) {
-        int i= itemCustomDao.countItems();
+    public Result<TbItemCustum> listItemByPage(Page page,Order order, TbItemQuery query) {
+        int i= itemCustomDao.countItems(query);
         Result<TbItemCustum> result = new Result<>();
         long total = (long)i;
         result.setTotal(total);
-            List<TbItemCustum> tbItems = itemCustomDao.listItemByPage(page,order);
+            List<TbItemCustum> tbItems = itemCustomDao.listItemByPage(page,order,query);
             result.setRows(tbItems);
         return result;
     }

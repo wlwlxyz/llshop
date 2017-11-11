@@ -12,11 +12,24 @@
                         ELSE "未知" END as statusName
 
     </sql>
+    <sql id="where_caluse">
+        <where>
+            i.status != 3
+            <if test="query!=null and query.title!=null and query.title!=' ' ">
+                    and i.title LIKE '%${query.title}%'
+            </if>
+            <if test="query!=null and query.status!=null and query.status!=0 ">
+                and i.status=#{query.status}
+            </if>
+        </where>
+    </sql>
+
     <select id="countItems" resultType="int">
        select count(1)
-    from tb_item
-     WHERE status != 3
+    from tb_item i
+     <include refid="where_caluse"/>
     </select>
+
 
   <!--  <select id="listItemByPage" parameterType="com.wl.llshop.common.dto.Page" resultType="com.wl.llshop.pojo.vo.TbItemCustum">
     select
@@ -44,7 +57,7 @@
         <include refid="Base_Column_List"/>
         from tb_item i
         LEFT JOIN tb_item_cat c ON i.cid=c.id
-        WHERE i.status != 3
+        <include refid="where_caluse"/>
         <choose>
             <when test="order != null and order.sort !=null   and order.order != null">
                <foreach collection="order.orderParam" item="item" open="order by" close="" separator=",">

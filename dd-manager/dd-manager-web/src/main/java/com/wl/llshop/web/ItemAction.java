@@ -5,6 +5,7 @@ import com.wl.llshop.common.dto.Page;
 import com.wl.llshop.common.dto.Result;
 import com.wl.llshop.pojo.po.TbItem;
 import com.wl.llshop.pojo.vo.TbItemCustum;
+import com.wl.llshop.pojo.vo.TbItemQuery;
 import com.wl.llshop.service.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,8 +42,8 @@ public class ItemAction {
 
     @ResponseBody
     @RequestMapping(value="/items")
-    public Result<TbItemCustum> listItemByPage(Page page, Order order){
-        Result<TbItemCustum> list = itemService.listItemByPage(page,order);
+    public Result<TbItemCustum> listItemByPage(Page page, Order order, TbItemQuery query){
+        Result<TbItemCustum> list = itemService.listItemByPage(page,order,query);
 
         return list;
     }

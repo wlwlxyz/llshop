@@ -3,6 +3,7 @@ package com.wl.llshop.dao;
 import com.wl.llshop.common.dto.Order;
 import com.wl.llshop.common.dto.Page;
 import com.wl.llshop.pojo.vo.TbItemCustum;
+import com.wl.llshop.pojo.vo.TbItemQuery;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,8 +16,8 @@ import java.util.List;
  */
 public interface TbItemCustomMapper {
     //查询总个数
-    int countItems();
+    int countItems(@Param("query")  TbItemQuery query);
     //分页查询商品
-    List<TbItemCustum> listItemByPage(@Param("page") Page page,@Param("order") Order order);
+    List<TbItemCustum> listItemByPage(@Param("page") Page page,@Param("order") Order order,@Param("query")  TbItemQuery query);
 
 }

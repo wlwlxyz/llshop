@@ -1,42 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-
-<table id="dg">
-    <div id="toolbar">
-        <div style="padding: 5px; background-color: #fff;">
-            <label>商品标题：</label>
-            <input class="easyui-textbox" type="text" id="title">
-            <label>商品状态：</label>
-            <select id="status" class="easyui-combobox" >
-                <option value="0">全部</option>
-                <option value="1">正常</option>
-                <option value="2">下架</option>
-            </select>
-            <!--http://www.cnblogs.com/wisdomoon/p/3330856.html-->
-            <!--注意：要加上type="button",默认行为是submit-->
-            <button onclick="searchForm()"  type="button" class="easyui-linkbutton">搜索</button>
-        </div>
-        <div>
-            <button onclick="add()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</button>
-            <button onclick="edit()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</button>
-            <button onclick="remove()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</button>
-            <button onclick="down()" class="easyui-linkbutton" data-options="iconCls:'icon-down',plain:true">下架</button>
-            <button onclick="up()" class="easyui-linkbutton" data-options="iconCls:'icon-up',plain:true">上架</button>
-        </div>
-       <%-- <a onclick="add()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">增加</a>
-        <a onclick="edit()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
-        <a onclick="remove()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
-        <a onclick="down()" class="easyui-linkbutton" data-options="iconCls:'icon-down',plain:true">下架</a>
-        <a onclick="up()" class="easyui-linkbutton" data-options="iconCls:'icon-up',plain:true">上架</a>--%>
-
+<div id="toolbar">
+    <div style="padding: 5px; background-color: #fff;">
+        <label>商品标题：</label>
+        <input class="easyui-textbox" type="text" id="title">
+        <label>商品状态：</label>
+        <select id="status" class="easyui-combobox" >
+            <option value="0">全部</option>
+            <option value="1">正常</option>
+            <option value="2">下架</option>
+        </select>
+        <!--http://www.cnblogs.com/wisdomoon/p/3330856.html-->
+        <!--注意：要加上type="button",默认行为是submit-->
+        <button onclick="searchForm()"  type="button" class="easyui-linkbutton">搜索</button>
     </div>
+    <div>
+        <button onclick="add()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</button>
+        <button onclick="edit()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</button>
+        <button onclick="remove()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</button>
+        <button onclick="down()" class="easyui-linkbutton" data-options="iconCls:'icon-down',plain:true">下架</button>
+        <button onclick="up()" class="easyui-linkbutton" data-options="iconCls:'icon-up',plain:true">上架</button>
+    </div>
+    <%-- <a onclick="add()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">增加</a>
+     <a onclick="edit()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+     <a onclick="remove()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+     <a onclick="down()" class="easyui-linkbutton" data-options="iconCls:'icon-down',plain:true">下架</a>
+     <a onclick="up()" class="easyui-linkbutton" data-options="iconCls:'icon-up',plain:true">上架</a>--%>
 
-
-</table>
+</div>
+<table id="dg"></table>
 
 <script  type="text/javascript">
     function add(){
-        console.log('add');
+        llshop.addTabs('新增商品','item-add');
     };
 
     function edit(){
@@ -114,7 +110,7 @@
     };
     function searchForm(){
 
-        $('#table').datagrid('load',{
+        $('#dg').datagrid('load',{
             title: $('#title').val(),
             status: $('#status').combobox('getValue')
         });
