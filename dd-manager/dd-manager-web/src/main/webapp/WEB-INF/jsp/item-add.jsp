@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<div class="easyui-panel" title="商品详情" data-options="fit:true">
+<div class="easyui-panel" title="商品详情" data-options="fit:true" id="tab_">
     <form class="itemForm" id="itemAddForm" name="itemAddForm" method="post">
         <table style="width:100%;">
             <tr>
@@ -75,6 +75,32 @@
 </div>
 
 <script>
+    function submitForm() {
+        $('#itemAddForm').form('submit',{
+            url:'item',
+            //表单提交之前触发
+            onSubmit:function () {
+                //将表单的价格单位从元变成分
+                $('#price').val($('#priceView').val()*100);
+                /* $('#price').val($('#priceView').val()*100);*/
+                //做表单校验，表单上全部字段校验成功才能返回True，才会提交表单，如果任意一个字段校验错误，就返回FALSE就不会提交表单
+                return $(this).form('validate');
+            },
+            //后台处理成功后的回调函数
+            success:function (data) {
+                if (data>0){
+                    $.messager.alert('温馨提示','恭喜！添加商品成功！');
+                    llshop.addTabs('查询商品', 'item-list');
+                }
+
+        }
+    })
+    }
+
+
+
+    /*实例化编辑器 */
+    var ue = UE.getEditor('container');
     //初始化类别选择树
     $('#cid').combotree({
         url: 'itemCats?parentId=0',
@@ -100,3 +126,5 @@
     });
 
 </script>
+
+

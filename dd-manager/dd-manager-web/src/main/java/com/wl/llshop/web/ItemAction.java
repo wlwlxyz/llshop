@@ -65,4 +65,15 @@ public class ItemAction {
     public int updatedownrows(@RequestParam("ids[]") List<Long> ids){
         return itemService.updatedownrows(ids);
     }
+
+    //添加商品
+    @ResponseBody
+    @RequestMapping(value = "item")
+    public int saveItem(TbItem tbItem,String content){
+        Long price = tbItem.getPrice();
+        System.out.println(price+"~~~~~~~~~~");
+        int i = itemService.saveItem(tbItem, content);
+        return i;
+    }
+
 }

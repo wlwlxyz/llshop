@@ -3,16 +3,21 @@ package com.wl.llshop.service.impl;
 import com.wl.llshop.common.dto.Order;
 import com.wl.llshop.common.dto.Page;
 import com.wl.llshop.common.dto.Result;
+import com.wl.llshop.common.util.IDUtils;
 import com.wl.llshop.dao.TbItemCustomMapper;
+import com.wl.llshop.dao.TbItemDescMapper;
 import com.wl.llshop.dao.TbItemMapper;
 import com.wl.llshop.pojo.po.TbItem;
+import com.wl.llshop.pojo.po.TbItemDesc;
 import com.wl.llshop.pojo.po.TbItemExample;
 import com.wl.llshop.pojo.vo.TbItemCustum;
 import com.wl.llshop.pojo.vo.TbItemQuery;
 import com.wl.llshop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,17 +31,25 @@ public class ItemServiceImpl implements ItemService{
 
     @Autowired
     private  TbItemMapper itemdao;
-  /*  private TbItemMapper itemdao;*/
+
     @Autowired
     private TbItemCustomMapper itemCustomDao;
-    /*private TbItemCustomMapper itemCustomDao;*/
-    
 
+    @Autowired
+    private TbItemDescMapper itemDescDao;
+
+
+    /**
+     * 根据主键查询商品
+     * @param itemId
+     * @return
+     */
     @Override
     public TbItem getById(Long itemId) {
         TbItem tbItem = itemdao.selectByPrimaryKey(itemId);
         return tbItem;
     }
+
 
     @Override
     public List<TbItem> listItems() {
@@ -82,5 +95,27 @@ public class ItemServiceImpl implements ItemService{
         TbItemExample.Criteria criteria = example.createCriteria();
         criteria.andIdIn(ids);
         return itemdao.updateByExampleSelective(tbItem,example);
+    }
+
+    //加上  @Transactional这个方法就变成了事务方法
+    @Transactional
+    @Override
+    public int saveItem(TbItem tbItem, String content) {
+        int i=0;
+        int j=0;
+        Long itemId = IDUtils.getItemId();
+        tbItem.setId(itemId);
+        tbItem.setCreated(new Date());
+        tbItem.setUpdated(new Date());
+        tbItem.setStatus((byte)1);
+        i=itemdao.insert(tbItem);
+        TbItemDesc tbItemDesc = new TbItemDesc();
+        tbItemDesc.setItemDesc(content);
+        tbItemDesc.setItemId(itemId);
+        tbItemDesc.setCreated(new Date());
+        tbItemDesc.setUpdated(new Date());
+        j= itemDescDao.insert(tbItemDesc);
+        int k=i+j;
+        return k;
     }
 }
