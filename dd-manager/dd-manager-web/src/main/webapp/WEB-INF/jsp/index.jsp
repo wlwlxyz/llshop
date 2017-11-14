@@ -25,6 +25,7 @@
                 <li data-options="attributes:{'href':'item-list'}">查询商品</li>
                 <li data-options="attributes:{'href':'item-param-list'}">规格参数</li>
             </ul>
+
         </div>
         <div title="网站内容管理" data-options="iconCls:'icon-tip'" style="padding:10px 0;">
             <ul class="easyui-tree">
