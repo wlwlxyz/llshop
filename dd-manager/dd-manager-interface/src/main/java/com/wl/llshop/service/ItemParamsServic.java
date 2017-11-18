@@ -2,6 +2,7 @@ package com.wl.llshop.service;
 
 import com.wl.llshop.common.dto.Page;
 import com.wl.llshop.common.dto.Result;
+import com.wl.llshop.pojo.po.TbItemParam;
 import com.wl.llshop.pojo.vo.TbItemParamCustom;
 
 /**
@@ -13,4 +14,8 @@ import com.wl.llshop.pojo.vo.TbItemParamCustom;
 public interface ItemParamsServic {
 
     Result<TbItemParamCustom> ListItemParamsByPage(Page page);
+
+    int saveParamItem(Long cid, String paramDate);
+
+    TbItemParam getItemParamByCid(Long cid);
 }

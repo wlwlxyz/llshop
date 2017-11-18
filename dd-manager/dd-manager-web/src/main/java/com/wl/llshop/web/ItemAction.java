@@ -35,7 +35,7 @@ public class ItemAction {
     @ResponseBody
     @RequestMapping(value="/item/{itemId}",method = RequestMethod.GET)
     public TbItem getByid(@PathVariable("itemId") Long itemId){
-        System.out.println(itemId);
+
         TbItem byId = itemService.getById(itemId);
         return byId;
     }
@@ -69,10 +69,10 @@ public class ItemAction {
     //添加商品
     @ResponseBody
     @RequestMapping(value = "item")
-    public int saveItem(TbItem tbItem,String content){
+    public int saveItem(TbItem tbItem,String content,String paramData){
         Long price = tbItem.getPrice();
-        System.out.println(price+"~~~~~~~~~~");
-        int i = itemService.saveItem(tbItem, content);
+
+        int i = itemService.saveItem(tbItem, content,paramData);
         return i;
     }
 

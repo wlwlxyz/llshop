@@ -7,9 +7,11 @@ import com.wl.llshop.common.util.IDUtils;
 import com.wl.llshop.dao.TbItemCustomMapper;
 import com.wl.llshop.dao.TbItemDescMapper;
 import com.wl.llshop.dao.TbItemMapper;
+import com.wl.llshop.dao.TbItemParamItemMapper;
 import com.wl.llshop.pojo.po.TbItem;
 import com.wl.llshop.pojo.po.TbItemDesc;
 import com.wl.llshop.pojo.po.TbItemExample;
+import com.wl.llshop.pojo.po.TbItemParamItem;
 import com.wl.llshop.pojo.vo.TbItemCustum;
 import com.wl.llshop.pojo.vo.TbItemQuery;
 import com.wl.llshop.service.ItemService;
@@ -38,6 +40,8 @@ public class ItemServiceImpl implements ItemService{
     @Autowired
     private TbItemDescMapper itemDescDao;
 
+    @Autowired
+    private TbItemParamItemMapper itemParamItemDao;
 
     /**
      * 根据主键查询商品
@@ -100,7 +104,7 @@ public class ItemServiceImpl implements ItemService{
     //加上  @Transactional这个方法就变成了事务方法
     @Transactional
     @Override
-    public int saveItem(TbItem tbItem, String content) {
+    public int saveItem(TbItem tbItem, String content,String paramData) {
         int i=0;
         int j=0;
         Long itemId = IDUtils.getItemId();
@@ -115,7 +119,13 @@ public class ItemServiceImpl implements ItemService{
         tbItemDesc.setCreated(new Date());
         tbItemDesc.setUpdated(new Date());
         j= itemDescDao.insert(tbItemDesc);
-        int k=i+j;
-        return k;
+        TbItemParamItem tbItemParamItem = new TbItemParamItem();
+        tbItemParamItem.setItemId(itemId);
+        tbItemParamItem.setParamData(paramData);
+        tbItemParamItem.setCreated(new Date());
+        tbItemParamItem.setUpdated(new Date());
+        int k = itemParamItemDao.insert(tbItemParamItem);
+        int h=i+j+k;
+        return h;
     }
 }

@@ -61,6 +61,16 @@
 <!-- ueditor编辑器源码文件 -->
 <script type="text/javascript" src="js/ueditor/ueditor.all.js"></script>
 
+<script>
+    UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+    UE.Editor.prototype.getActionUrl = function(action) {
+        if (action == 'upload') {
+            return 'http://101.132.179.155/images/2017/11/18';
+        }else {
+            return this._bkGetActionUrl.call(this, action);
+        }
+    }
+</script>
 
 <!-- 自定义脚本 -->
 <script src="js/common.js"></script>

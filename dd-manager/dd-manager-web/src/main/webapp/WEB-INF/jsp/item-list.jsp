@@ -120,99 +120,6 @@
 
 
 <script>
-    <%-- var toolbar = [{
-            iconCls: 'icon-add',
-            text: '增加',
-            handler: function () {
-                console.log('add');
-            }
-        },{
-            iconCls: 'icon-edit',
-            text: '编辑',
-            handler: function () {
-                console.log('edit');
-            }
-        },{
-            iconCls: 'icon-remove',
-            text: '删除',
-            handler: function () {
-                var selectrows=$('#dg').datagrid('getSelections');
-                console.log(selectrows);
-                if (selectrows==0){
-                    $.messager.alert("提示","请至少选择一条记录哟^_^!");
-                    return ;
-                }
-                $.messager.confirm("确认","亲，是否要删除这些记录~_~!",function (r) {
-                    if(r) {
-                        var ids=[];
-                        for(var i=0;i<selectrows.length;i++){
-                            ids.push(selectrows[i].id);
-                        }
-                        $.post(
-                            'items/batch',
-                            {'ids[]':ids},
-                            function (data) {
-                                $('#dg').datagrid('reload');
-                            },
-                            'json'
-                        )
-                    }
-                })
-            }
-        },{
-            iconCls: 'icon-up',
-            text: '上架',
-            handler: function () {
-                var  uprows=$('#dg').datagrid("getSelections");
-                if(uprows==0){
-                    $.messager.alert("提示","请至少选择一条记录哟^_^!");
-                    return ;
-                }
-                $.messager.confirm("确认","选中的商品确定上架？_？",function (r) {
-                    if(r){
-                        var ids=[];
-                        for(var i=0;i<uprows.length;i++){
-                            ids.push(uprows[i].id);
-                        }
-                        $.post(
-                            'items/uprows',
-                            {'ids[]':ids},
-                            function (data) {
-                                $('#dg').datagrid('reload');
-                            },
-                            'json'
-                        )
-                    }
-                })
-
-            }
-        },{
-            iconCls: 'icon-down',
-            text: '下架',
-            handler: function () {
-                var downrows= $("#dg").datagrid("getSelections");
-                if (downrows==0){
-                    $.messager.alert("提示","至少选择一条记录哟~_~");
-                    return ;
-                }
-                $.messager.confirm("确认","是否将选中商品改为下架",function (r) {
-                    if(r){
-                        var ids=[];
-                        for(var i=0;i<downrows.length;i++){
-                            ids.push(downrows[i].id);
-                        }
-                        $.post(
-                            'items/downrows',
-                            {"ids[]":ids},
-                            function (data) {
-                                $("#dg").datagrid("reload");
-                            },
-                            'json'
-                        )
-                    }
-                })
-            }
-        }];--%>
     $('#dg').datagrid({
         //使用按钮
         toolbar: '#toolbar',
@@ -241,13 +148,13 @@
             {field: 'title', title: '商品名称', width: 100,sortable:true},
             {field: 'sellPoint', title: '卖点', width: 100,sortable:true},
             {field: 'priceView', title: '价格', width: 100},
-            {field: 'statusName', title: '商品类型', width: 100},
+            {field: 'catName', title: '商品类型', width: 100},
             {field: 'num', title: '数量', width: 100},
             {field: 'created', title: '创建时间', width: 100,formatter:function (value,row,index) {
                 return moment(value).format("l");
             }},
             {field: 'updatedtime', title: '修改时间', width: 100},
-            {field: 'stuting', title: '状态', width: 100}
+            {field: 'statusName', title: '状态', width: 100}
         ]]
 
     });
