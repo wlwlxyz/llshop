@@ -23,7 +23,7 @@ import java.util.Map;
 public class FileServiceImpl implements FileService {
 
     @Override
-    public Map<String, Object> upload(MultipartFile multipartFile) {
+    public Map<String, Object> uploadImage(MultipartFile multipartFile) {
         Map<String, Object> map = new HashMap<String, Object>();
         //读取FTP配置文件信息
         String name = "ftp.properties";

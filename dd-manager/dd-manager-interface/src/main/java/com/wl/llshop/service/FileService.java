@@ -12,5 +12,5 @@ import java.util.Map;
  */
 public interface FileService {
 
-    Map<String,Object> upload(MultipartFile upfile);
+    Map<String,Object> uploadImage(MultipartFile upfile);
 }

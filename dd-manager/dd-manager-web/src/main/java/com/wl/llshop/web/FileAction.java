@@ -46,7 +46,7 @@ public class FileAction {
     @RequestMapping(value="/file/upload",method = RequestMethod.POST)
     public Map<String,Object> upload( MultipartFile upfile){
         System.out.println(upfile.getName());
-        return fileService.upload(upfile);
+        return fileService.uploadImage(upfile);
     }
 
 }
