@@ -1,3 +1,4 @@
+/*
 package com.wl.llshop.jedis;
 
 import org.junit.Test;
@@ -9,12 +10,14 @@ import redis.clients.jedis.JedisPool;
 import java.util.HashSet;
 import java.util.Set;
 
+*/
 /**
  * User: Administrator
  * Date: 2017/11/20
  * Time: 19:51
  * Version:V1.0
- */
+ *//*
+
 public class TestJedis {
     @Test
     public void testJedis1(){
@@ -56,3 +59,4 @@ public class TestJedis {
     }
 
 }
+*/

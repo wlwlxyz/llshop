@@ -120,8 +120,8 @@
                 if (data>0){
                     $.messager.alert('温馨提示','恭喜！添加商品成功！');
                     llshop.closeTabs('新增商品');
-
                     llshop.addTabs('查询商品', 'item-list');
+                    $('#dg').datagrid('reload');
                 }
 
         }

@@ -31,27 +31,6 @@
     </select>
 
 
-  <!--  <select id="listItemByPage" parameterType="com.wl.llshop.common.dto.Page" resultType="com.wl.llshop.pojo.vo.TbItemCustum">
-    select
-    <include refid="Base_Column_List"/>
-        from tb_item i
-        LEFT JOIN tb_item_cat c ON i.cid=c.id
-        WHERE i.status != 3
-        <choose>
-            <when test="order != null and order.sort eq'sellPoint'   and order.order != null">
-                ORDER BY   CONVERT(${order.sort} USING gbk) ${order.order}
-            </when>
-            <when test="order != null and order.sort eq'title'   and order.order != null">
-                ORDER BY   CONVERT(i.${order.sort} USING gbk) ${order.order}
-            </when>
-            <otherwise>
-                ORDER BY i.id DESC
-            </otherwise>
-        </choose>
-        limit #{page.offset},#{page.rows}
-    </select>-->
-
-
     <select id="listItemByPage" parameterType="com.wl.llshop.common.dto.Page" resultType="com.wl.llshop.pojo.vo.TbItemCustum">
         select
         <include refid="Base_Column_List"/>
@@ -82,6 +61,23 @@
             </otherwise>
         </choose>
         limit #{page.offset},#{page.rows}
+    </select>
+
+    <select id="searchItem" resultType="com.wl.llshop.pojo.vo.TbSearchItemCustom">
+       SELECT
+    i.id,
+    i.title,
+    i.sell_point as sellPoint,
+    i.price,
+    i.image,
+    c.name as catName
+    FROM
+    tb_item i
+    LEFT JOIN tb_item_cat c ON i.cid = c.id
+    WHERE
+    i.status = 1
+    order by i.id desc
+
     </select>
 
 
