@@ -8,6 +8,7 @@ package com.wl.llshop.common.dto;
  * Version:V1.0
  */
 public class MessageResult {
+
     //判定返回是否成功
     private boolean success;
     //存放返回的消息
